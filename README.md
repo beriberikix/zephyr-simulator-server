@@ -41,6 +41,18 @@ docker compose up -d
 - API: http://localhost:8080/api
 - Health: http://localhost:8080/api/health
 
+## Production Deployment
+
+Production deployment for DigitalOcean + Cloudflare + Caddy is documented in [docs/deploy/PRODUCTION_DEPLOYMENT.md](docs/deploy/PRODUCTION_DEPLOYMENT.md).
+
+Core commands on the droplet:
+
+```bash
+./scripts/deploy/deploy_prod.sh
+./scripts/deploy/upgrade_prod.sh
+./scripts/deploy/rollback_prod.sh
+```
+
 ## Local Development
 
 Backend:

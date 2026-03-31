@@ -40,6 +40,24 @@ Endpoints:
 - Health: http://localhost:8080/api/health
 - PocketBase admin: http://localhost:8080/_/
 
+## Production Deployment and Updates
+
+For production deployment on a droplet with Cloudflare + Caddy, use:
+
+- docs/deploy/PRODUCTION_DEPLOYMENT.md
+
+Source-code update path:
+
+```bash
+./scripts/deploy/upgrade_prod.sh
+```
+
+Rollback path:
+
+```bash
+./scripts/deploy/rollback_prod.sh
+```
+
 ## Local Development
 
 Backend:

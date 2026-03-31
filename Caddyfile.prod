@@ -1,0 +1,29 @@
+# Production Caddyfile for zephyr-simulator-server
+# Values come from environment variables set in .env.production.
+
+{$DOMAIN} {
+    tls {$ACME_EMAIL}
+
+    encode gzip zstd
+    log
+
+    # API routes to backend
+    handle /api/* {
+        reverse_proxy backend:8080
+    }
+
+    # SSE endpoint to backend
+    handle /api/sse* {
+        reverse_proxy backend:8080
+    }
+
+    # Health check endpoint for external monitoring
+    handle /health {
+        respond "OK" 200
+    }
+
+    # Frontend SPA
+    handle {
+        reverse_proxy frontend:5173
+    }
+}
