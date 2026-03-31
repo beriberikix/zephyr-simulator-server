@@ -1,0 +1,60 @@
+# Build artifacts
+bin/
+server
+dist/
+build/
+*.o
+*.a
+*.so
+
+# Go
+*.out
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+pnpm-lock.yaml
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# PocketBase
+/data
+pb_migrations
+
+# Local runtime artifacts
+data/coverage/
+data/sanitizers/
+data/pcaps/
+data/state.json
+data/pb_data/storage/
+
+# Frontend build outputs
+web/dist/
+web/dist-copilot/
+web/dist-local-verify/
+
+# Python virtual environments
+firmware/.venv/
+
+# Docker
+.dockerignore
+Dockerfile.bak
+
+# Temporary
+*.tmp
+/tmp
+
+# Session artifacts (local testing)
+/var/lib/zephyr-emu/

@@ -1,0 +1,15 @@
+build/
+zephyr/
+.west/
+binaries/
+*.o
+*.a
+*.elf
+.venv/
+__pycache__/
+*.pyc
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
