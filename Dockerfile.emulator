@@ -1,0 +1,25 @@
+# Minimal base image for running Zephyr native_sim binaries
+FROM debian:bookworm-slim
+
+# Install runtime dependencies for native_sim binaries.
+# - Add i386 architecture and install i386 libc/libgcc/libstdc++ for 32-bit native_sim builds.
+# - passt provides the `pasta` binary used for transparent TCP/UDP forwarding.
+RUN dpkg --add-architecture i386 \
+    && apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates \
+    libc6 \
+    libstdc++6 \
+    libc6:i386 \
+    libstdc++6:i386 \
+    libgcc-s1:i386 \
+    passt \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create directories for session mounts
+RUN mkdir -p /emu /tmp/uart
+
+# Set default working directory
+WORKDIR /emu
+
+# Default command: sleep indefinitely (binary will be copied and executed)
+CMD ["sh", "-c", "while true; do sleep 3600; done"]

@@ -1,0 +1,54 @@
+services:
+  # Backend API server (Go + PocketBase)
+  backend:
+    build: .
+    container_name: zephyr-backend
+    ports:
+      - "8080:8080"
+    environment:
+      PORT: "8080"
+      BASE_IMAGE_URL: "zephyr-emulator:latest"
+      RUNTIME_NAME: "runsc"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./data:/data
+    networks:
+      - zephyr-network
+    restart: unless-stopped
+
+  # Frontend (React + Vite, served via Caddy)
+  frontend:
+    image: node:20-alpine
+    container_name: zephyr-frontend
+    working_dir: /app
+    volumes:
+      - ./web:/app
+    ports:
+      - "5173:5173"
+    command: sh -c "npm install && npm run dev -- --host 0.0.0.0"
+    networks:
+      - zephyr-network
+    restart: unless-stopped
+
+  # Reverse proxy (Caddy)
+  caddy:
+    image: caddy:2.7-alpine
+    container_name: zephyr-caddy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - zephyr-network
+    restart: unless-stopped
+
+networks:
+  zephyr-network:
+    driver: bridge
+
+volumes:
+  caddy_data:
+  caddy_config:

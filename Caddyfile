@@ -1,0 +1,29 @@
+# Caddyfile - Reverse proxy configuration for Zephyr Remote Emulator
+
+:80 {
+    log
+
+    # API routes to backend
+    handle /api/* {
+        reverse_proxy backend:8080
+    }
+
+    # SSE endpoint to backend
+    handle /api/sse {
+        reverse_proxy backend:8080 {
+            # Keep-alive for SSE
+            header_up Connection "upgrade"
+            header_up Upgrade "websocket"
+        }
+    }
+
+    # Frontend SPA - fallback to index.html for client-side routing
+    handle {
+        reverse_proxy frontend:5173
+    }
+
+    # Health check endpoint
+    handle /health {
+        respond "OK" 200
+    }
+}

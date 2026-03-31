@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-muted: #f1f5f9;
+  --text: #0f172a;
+  --text-muted: #334155;
+  --border: #cbd5e1;
+  --code-bg: #e2e8f0;
+  --code-text: #0f172a;
+  --pre-bg: #0f172a;
+  --pre-text: #f8fafc;
+}
+
+html.dark {
+  --bg: #020617;
+  --surface: #0f172a;
+  --surface-muted: #1e293b;
+  --text: #e2e8f0;
+  --text-muted: #cbd5e1;
+  --border: #334155;
+  --code-bg: #1e293b;
+  --code-text: #e2e8f0;
+  --pre-bg: #020617;
+  --pre-text: #e2e8f0;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+code {
+  @apply px-2 py-1 rounded text-sm;
+  background-color: var(--code-bg);
+  color: var(--code-text);
+}
+
+pre {
+  @apply p-4 rounded-lg overflow-auto;
+  background-color: var(--pre-bg);
+  color: var(--pre-text);
+}
