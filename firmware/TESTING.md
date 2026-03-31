@@ -413,13 +413,13 @@ for binary in firmware/binaries/*; do
   id=$(basename "$binary")
   response=$(curl -s -F "binary=@$binary" http://localhost:8080/api/binaries)
   binary_id=$(echo "$response" | jq -r '.data.id')
-  
+
   # Create session
   session=$(curl -s -X POST http://localhost:8080/api/sessions \
     -H "Content-Type: application/json" \
     -d "{\"binary_id\": \"$binary_id\", \"seed\": 0}")
   session_id=$(echo "$session" | jq -r '.data.id')
-  
+
   # Start and stream
   curl -X POST http://localhost:8080/api/sessions/$session_id/start
   curl -s "http://localhost:8080/api/sse?session_id=$session_id" \

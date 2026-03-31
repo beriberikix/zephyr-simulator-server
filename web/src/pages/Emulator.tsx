@@ -429,11 +429,10 @@ export default function EmulatorPage() {
                 Status
               </label>
               <div className="flex items-center gap-2">
-                <div className={`w-3 h-3 rounded-full ${
-                  session.state === 'running' ? 'bg-emerald-500' :
-                  session.state === 'paused' ? 'bg-amber-500' :
-                  'bg-rose-500'
-                }`}></div>
+                <div className={`w-3 h-3 rounded-full ${session.state === 'running' ? 'bg-emerald-500' :
+                    session.state === 'paused' ? 'bg-amber-500' :
+                      'bg-rose-500'
+                  }`}></div>
                 <span className="text-sm font-medium text-slate-900 dark:text-slate-100 capitalize">
                   {session.state}
                 </span>
@@ -605,12 +604,11 @@ export default function EmulatorPage() {
                   <div className="mt-3">
                     <div className="flex items-center justify-between mb-2">
                       <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100">GDB Remote Debug</h3>
-                      <span className={`text-xs px-2 py-1 rounded-full ${
-                        debugState === 'connected' ? 'bg-emerald-100 text-emerald-900 dark:bg-emerald-900/40 dark:text-emerald-200' :
-                        debugState === 'connecting' ? 'bg-amber-100 text-amber-900 dark:bg-amber-900/40 dark:text-amber-200' :
-                        debugState === 'error' ? 'bg-rose-100 text-rose-900 dark:bg-rose-900/40 dark:text-rose-200' :
-                        'bg-slate-100 text-slate-700 dark:bg-slate-700 dark:text-slate-100'
-                      }`}>
+                      <span className={`text-xs px-2 py-1 rounded-full ${debugState === 'connected' ? 'bg-emerald-100 text-emerald-900 dark:bg-emerald-900/40 dark:text-emerald-200' :
+                          debugState === 'connecting' ? 'bg-amber-100 text-amber-900 dark:bg-amber-900/40 dark:text-amber-200' :
+                            debugState === 'error' ? 'bg-rose-100 text-rose-900 dark:bg-rose-900/40 dark:text-rose-200' :
+                              'bg-slate-100 text-slate-700 dark:bg-slate-700 dark:text-slate-100'
+                        }`}>
                         {debugState}
                       </span>
                     </div>

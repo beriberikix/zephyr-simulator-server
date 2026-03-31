@@ -196,14 +196,14 @@ SELECT * FROM sessions WHERE state = 'running';
 
 ### Get Sessions for a Binary
 ```sql
-SELECT * FROM sessions 
-WHERE binary_id = 'abc123def456' 
+SELECT * FROM sessions
+WHERE binary_id = 'abc123def456'
 ORDER BY created DESC;
 ```
 
 ### Archive UART Logs (optional cleanup)
 ```sql
-DELETE FROM uart_logs 
+DELETE FROM uart_logs
 WHERE created < datetime('now', '-7 days')
   AND session_id NOT IN (
     SELECT id FROM sessions WHERE state = 'running'
@@ -212,9 +212,9 @@ WHERE created < datetime('now', '-7 days')
 
 ### Find Oldest Active Session (for timeout logic)
 ```sql
-SELECT * FROM sessions 
-WHERE state = 'running' 
-ORDER BY updated ASC 
+SELECT * FROM sessions
+WHERE state = 'running'
+ORDER BY updated ASC
 LIMIT 1;
 ```
 
@@ -264,5 +264,5 @@ tar czf sessions-backup.tar.gz /var/lib/zephyr-emu/sessions/
 
 ---
 
-**Last Updated:** 2026-03-30  
+**Last Updated:** 2026-03-30
 **Version:** 0.1.0

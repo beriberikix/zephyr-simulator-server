@@ -102,7 +102,7 @@ export default function NetworkConfigPanel({ sessionId, onConfigUpdate, embedded
 
   const updateCanDevice = (idx: number, field: string, value: any) => {
     const updated = [...canDevices]
-    ;(updated[idx] as any)[field] = value
+      ; (updated[idx] as any)[field] = value
     setCanDevices(updated)
   }
 
@@ -128,7 +128,7 @@ export default function NetworkConfigPanel({ sessionId, onConfigUpdate, embedded
 
   const updateTapInterface = (idx: number, field: string, value: any) => {
     const updated = [...tapInterfaces]
-    ;(updated[idx] as any)[field] = value
+      ; (updated[idx] as any)[field] = value
     setTapInterfaces(updated)
   }
 
@@ -149,11 +149,10 @@ export default function NetworkConfigPanel({ sessionId, onConfigUpdate, embedded
       )}
 
       {message && (
-        <div className={`mb-4 rounded-md px-3 py-2 text-sm ${
-          message.includes('success') || message.includes('updated')
+        <div className={`mb-4 rounded-md px-3 py-2 text-sm ${message.includes('success') || message.includes('updated')
             ? 'bg-emerald-50 dark:bg-emerald-900/40 border border-emerald-200 dark:border-emerald-700 text-emerald-900 dark:text-emerald-200'
             : 'bg-rose-50 dark:bg-rose-900/40 border border-rose-200 dark:border-rose-700 text-rose-900 dark:text-rose-200'
-        }`}>
+          }`}>
           {message}
         </div>
       )}
@@ -391,34 +390,34 @@ export default function NetworkConfigPanel({ sessionId, onConfigUpdate, embedded
                   <option value="hci_uart">HCI over UART</option>
                 </select>
                 {bluetoothConfig.transport === 'hci' ? (
-                <input
-                  type="text"
-                  placeholder="HCI device (e.g., /dev/hci0)"
-                  value={bluetoothConfig.host_device_path}
-                  onChange={(e) => setBluetoothConfig({...bluetoothConfig, host_device_path: e.target.value})}
-                  className="w-full px-2 py-1 text-sm border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 rounded"
-                />
+                  <input
+                    type="text"
+                    placeholder="HCI device (e.g., /dev/hci0)"
+                    value={bluetoothConfig.host_device_path}
+                    onChange={(e) => setBluetoothConfig({ ...bluetoothConfig, host_device_path: e.target.value })}
+                    className="w-full px-2 py-1 text-sm border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 rounded"
+                  />
                 ) : (
                   <>
                     <input
                       type="text"
                       placeholder="UART device (e.g., /dev/ttyUSB0)"
                       value={bluetoothConfig.uart_device_path || ''}
-                      onChange={(e) => setBluetoothConfig({...bluetoothConfig, uart_device_path: e.target.value})}
+                      onChange={(e) => setBluetoothConfig({ ...bluetoothConfig, uart_device_path: e.target.value })}
                       className="w-full px-2 py-1 text-sm border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 rounded"
                     />
                     <input
                       type="number"
                       placeholder="UART baud rate"
                       value={bluetoothConfig.uart_baud_rate || 115200}
-                      onChange={(e) => setBluetoothConfig({...bluetoothConfig, uart_baud_rate: parseInt(e.target.value) || 115200})}
+                      onChange={(e) => setBluetoothConfig({ ...bluetoothConfig, uart_baud_rate: parseInt(e.target.value) || 115200 })}
                       className="w-full px-2 py-1 text-sm border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 rounded"
                     />
                   </>
                 )}
                 <select
                   value={bluetoothConfig.advertising_mode}
-                  onChange={(e) => setBluetoothConfig({...bluetoothConfig, advertising_mode: e.target.value})}
+                  onChange={(e) => setBluetoothConfig({ ...bluetoothConfig, advertising_mode: e.target.value })}
                   className="w-full px-2 py-1 text-sm border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 rounded"
                 >
                   <option value="connectable">Connectable</option>

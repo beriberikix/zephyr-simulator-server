@@ -356,5 +356,5 @@ Docker.Stop() triggers cleanup:
 
 ---
 
-**Last Updated:** 2026-03-30  
+**Last Updated:** 2026-03-30
 **Version:** 0.1.0

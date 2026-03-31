@@ -341,7 +341,7 @@ curl -X POST http://localhost:8080/api/sessions/{id}/update \
 **Status:** ✅ **FULLY TESTABLE**
 
 **Modes:**
-1. **HCI Device** — Direct pass-through of `/dev/hci0` 
+1. **HCI Device** — Direct pass-through of `/dev/hci0`
 2. **HCI-over-UART** — Bluetooth stack over UART device
 
 **Testable Scenarios:**
