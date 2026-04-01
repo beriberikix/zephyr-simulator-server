@@ -16,8 +16,10 @@ RUN go mod download
 # Copy source code
 COPY . .
 
+ARG BACKEND_MAIN_TARGET=./cmd/server/main.go
+
 # Build the application
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o server ./cmd/server/main.go
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o server "$BACKEND_MAIN_TARGET"
 
 # Final stage
 FROM alpine:3.19
