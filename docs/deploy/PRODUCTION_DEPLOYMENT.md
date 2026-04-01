@@ -32,6 +32,19 @@ Edit `.env.production`:
 - `DOMAIN=coap.cloud`
 - `ACME_EMAIL=jmberi@gmail.com`
 - `RUNTIME_NAME=runsc` (or `runc` if gVisor is unavailable)
+- `BACKEND_IMAGE_REPO=ghcr.io/beriberikix/zephyr-simulator-server-backend`
+- `BACKEND_IMAGE_TAG=latest` (or a specific commit SHA tag for pinned releases)
+
+## 3.5 Backend image publishing (GitHub Actions)
+
+Backend images are built in GitHub Actions and published to GHCR:
+
+- Workflow: `.github/workflows/build-backend-image.yml`
+- Published tags:
+	- `latest`
+	- `${GITHUB_SHA}`
+
+For production safety, prefer sha-pinned tags in `.env.production`.
 
 ## 3. Cloudflare DNS for first certificate issuance
 
@@ -46,10 +59,17 @@ Keep Cloudflare SSL mode at `Full (strict)`; proxy can be re-enabled after first
 ```
 
 What this does:
-- Builds emulator and backend images
+- Builds emulator image locally
+- Pulls backend image from GHCR
 - Starts stack with production compose overlay
 - Runs local health checks through Caddy
 - Records known-good commit in `.deploy/known_good_commit`
+
+If GHCR package visibility is private, authenticate once on droplet:
+
+```bash
+docker login ghcr.io
+```
 
 ## 5. Verify
 
@@ -70,8 +90,9 @@ Run on the droplet from repository root:
 
 What this does:
 - Stores current commit in `.deploy/previous_commit`
+- Stores current backend image in `.deploy/previous_backend_image`
 - Fast-forwards local `main` from `origin/main`
-- Rebuilds and redeploys
+- Pulls configured backend image and redeploys
 - Verifies health checks
 
 ## 7. Rollback path
@@ -84,7 +105,8 @@ If upgrade verification fails, run:
 
 What this does:
 - Checks out `.deploy/previous_commit`
-- Rebuilds and redeploys that commit
+- Reapplies `.deploy/previous_backend_image` (if present)
+- Redeploys that commit
 - Re-runs health checks
 
 ## 8. PocketBase superuser bootstrap

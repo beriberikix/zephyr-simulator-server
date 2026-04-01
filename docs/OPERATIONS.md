@@ -33,6 +33,12 @@ docker build -f Dockerfile.emulator -t zephyr-emulator:latest .
 docker compose up -d
 ```
 
+Production startup (backend image from GHCR):
+
+```bash
+./scripts/deploy/deploy_prod.sh
+```
+
 Endpoints:
 
 - Frontend: http://localhost:80
@@ -124,7 +130,13 @@ sudo chmod 660 /dev/hci0
 ### Image Not Found
 
 ```bash
-docker build -f Dockerfile.emulator -t zephyr-emulator:latest .
+docker pull "$BACKEND_IMAGE_REPO:$BACKEND_IMAGE_TAG"
+```
+
+If GHCR package is private, authenticate first:
+
+```bash
+docker login ghcr.io
 ```
 
 ### Docker Connection Issues

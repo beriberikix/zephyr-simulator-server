@@ -1,5 +1,6 @@
 services:
   backend:
+    image: ${BACKEND_IMAGE_REPO}:${BACKEND_IMAGE_TAG}
     env_file:
       - .env.production
     ports: []
