@@ -19,7 +19,7 @@ COPY . .
 ARG BACKEND_MAIN_TARGET=./cmd/server/main.go
 
 # Build the application
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o server "$BACKEND_MAIN_TARGET"
+RUN CGO_ENABLED=0 GOOS=linux GOMAXPROCS=2 GOMEMLIMIT=700MiB go build -trimpath -ldflags="-s -w" -o server "$BACKEND_MAIN_TARGET"
 
 # Final stage
 FROM alpine:3.19
